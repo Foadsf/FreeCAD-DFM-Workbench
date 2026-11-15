@@ -210,6 +210,39 @@ _SHARP_INTERNAL_SVG = (
     b'</svg>'
 )
 
+_TOOL_CORNER_SVG = (
+    # A pocket seen along the tool axis: the end mill (dashed circle) cannot reach a sharp corner; a corner
+    # rounded to at least its radius it cuts in one pass.
+    b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 165">'
+    b'<line x1="170" y1="10" x2="170" y2="155" stroke="__STROKE__" stroke-width="1"'
+    b' stroke-dasharray="3,3" opacity="0.25"/>'
+    b'<g>'
+    b'<circle cx="13" cy="13" r="8" fill="none" stroke="__BAD__" stroke-width="1.5"/>'
+    b'<path d="M9.5,9.5 L16.5,16.5 M16.5,9.5 L9.5,16.5" stroke="__BAD__" stroke-width="1.8"'
+    b' stroke-linecap="round"/>'
+    b'<path d="M25,30 L150,30 L150,145 L25,145 Z M50,55 L125,55 L125,120 L50,120 Z" fill="__BODY__"'
+    b' fill-rule="evenodd" stroke="__STROKE__" stroke-width="1.5" stroke-linejoin="round"/>'
+    b'<circle cx="108" cy="72" r="17" fill="none" stroke="__ACCENT__" stroke-width="1.5"'
+    b' stroke-dasharray="4,3"/>'
+    b'<circle cx="125" cy="55" r="4" fill="__BAD__"/>'
+    b'</g>'
+    b'<g transform="translate(170,0)">'
+    b'<circle cx="13" cy="13" r="8" fill="none" stroke="__GOOD__" stroke-width="1.5"/>'
+    b'<path d="M9,13.5 L12,16.5 L17,10" fill="none" stroke="__GOOD__" stroke-width="1.8"'
+    b' stroke-linecap="round" stroke-linejoin="round"/>'
+    b'<path d="M25,30 L150,30 L150,145 L25,145 Z M70,55 L105,55 A20,20 0 0,1 125,75 L125,100'
+    b' A20,20 0 0,1 105,120 L70,120 A20,20 0 0,1 50,100 L50,75 A20,20 0 0,1 70,55 Z" fill="__BODY__"'
+    b' fill-rule="evenodd" stroke="__STROKE__" stroke-width="1.5" stroke-linejoin="round"/>'
+    b'<circle cx="107" cy="73" r="17" fill="none" stroke="__ACCENT__" stroke-width="1.5"'
+    b' stroke-dasharray="4,3"/>'
+    b'<path d="M105,55 A20,20 0 0,1 125,75" fill="none" stroke="__ACCENT__" stroke-width="3"/>'
+    b'<text x="131.0" y="58.0" text-anchor="start" fill="__ACCENT__" font-size="15"'
+    b' font-family="sans-serif" font-style="italic">r'
+    b'</text>'
+    b'</g>'
+    b'</svg>'
+)
+
 _SHARP_EXTERNAL_SVG = (
     b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 165">'
     b'<line x1="170" y1="10" x2="170" y2="155" stroke="__STROKE__" stroke-width="1"'
@@ -2637,5 +2670,9 @@ DIAGRAMS: dict[Rulebook, RuleDiagram] = {
     Rulebook.MAX_PART_ASPECT_RATIO: RuleDiagram(
         svg=_LONG_PART_SVG,
         brief="Length of the whole part compared with its width.",
+    ),
+    Rulebook.MIN_TOOL_CORNER_RADIUS: RuleDiagram(
+        svg=_TOOL_CORNER_SVG,
+        brief="Inside corners along the tool axis, against the radius of the end mill that cuts them.",
     ),
 }

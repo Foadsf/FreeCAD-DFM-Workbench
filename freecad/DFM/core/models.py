@@ -70,6 +70,8 @@ class ProcessRequirement(Enum):
     # The part's nominal wall, measured or typed in: {"mode": "auto"} or
     # {"mode": "manual", "value": mm}. See core/utils/nominal_wall.py.
     NOMINAL_WALL_THICKNESS = "NOMINAL_WALL_THICKNESS"
+    # The axis a milling tool comes in along (3-axis machining: one per setup).
+    TOOL_AXIS = "TOOL_AXIS"
 
     @classmethod
     def from_str(cls, label: str):

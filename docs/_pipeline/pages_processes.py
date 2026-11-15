@@ -17,6 +17,8 @@ INPUTS = {
     "SIDE_ACTIONS": ("Side actions", "extra directions that slides or lifters move in, if the mold has any."),
     "NEUTRAL_PLANE": ("Neutral plane", "the plane the part's draft is measured from."),
     "PRINT_ORIENTATION": ("Print direction", "which way is up on the printer."),
+    "TOOL_AXIS": ("Tool axis", "the axis the milling tool comes in along, for one setup. Pick a face or "
+                               "edge, or an axis."),
     "NOZZLE_DIAMETER": ("Nozzle diameter", "the printer's nozzle. Some values are worked out from it."),
     "LAYER_HEIGHT": ("Layer height", "the slicer's layer height, for the stair-stepping on slopes."),
     "NOMINAL_WALL_THICKNESS": ("Nominal wall", "the thickness most of the part's walls share. "

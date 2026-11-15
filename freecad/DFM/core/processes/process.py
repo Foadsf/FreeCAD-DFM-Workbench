@@ -24,6 +24,7 @@ class ProcessArchetype(Enum):
     FDM = "FDM"
     RESIN = "RESIN"
     POWDER_BED = "POWDER_BED"
+    MACHINING = "MACHINING"
 
     @property
     def label(self) -> str:
@@ -33,6 +34,7 @@ class ProcessArchetype(Enum):
             "FDM": "FDM 3D Printing",
             "RESIN": "Resin 3D Printing",
             "POWDER_BED": "Powder Bed 3D Printing",
+            "MACHINING": "CNC Machining",
         }.get(self.name, self.name.replace("_", " ").title())
 
     @property
@@ -55,6 +57,10 @@ class ProcessArchetype(Enum):
             "POWDER_BED": (
                 "Powder bed fusion (SLS, MJF). Thresholds from material data. "
                 "The powder holds the part up, so no print orientation is needed."
+            ),
+            "MACHINING": (
+                "Milling with rotating cutters. Thresholds from material data. "
+                "Requires the tool axis of the setup for inside corner radii."
             ),
         }.get(self.name, "")
 

@@ -1,0 +1,104 @@
+name: CNC Milling (3-axis)
+category: CNC Machining
+archetype: MACHINING
+description: >-
+    Milling removes material with rotating end mills that come in along one
+    tool axis per setup. A tool leaves its own radius in every inside corner
+    between walls parallel to that axis, and thin walls deflect and chatter
+    under the cut. Run the analysis once per setup, with that setup's tool
+    axis.
+
+active_rules:
+- MIN_TOOL_CORNER_RADIUS
+- MIN_WALL_THICKNESS
+
+rule_feedback:
+    MIN_TOOL_CORNER_RADIUS:
+        warning_msg: >-
+            Inside corner radius {measured} is below the recommended {target}.
+            Only a smaller end mill reaches this corner, which cuts slower and
+            deflects more. Round the corner to at least {target}, or relieve it
+            with a dog-bone where a mating part needs a square corner.
+        error_msg: >-
+            Inside corner radius {measured} is below the {limit} minimum. No
+            end mill the shop uses reaches this corner along the tool axis.
+            Round the corner to at least {limit}, relieve it with a dog-bone,
+            or plan wire EDM for it.
+    MIN_WALL_THICKNESS:
+        warning_msg: >-
+            Wall thickness {measured} is below the recommended {target}. Thin
+            walls deflect and vibrate under the cut, so expect chatter marks
+            and a looser tolerance.
+        error_msg: >-
+            Wall thickness {measured} is below the {limit} minimum. The wall is
+            likely to bend or break under the cutting force. Thicken it, or
+            support it while it is machined.
+
+rule_criticality:
+    MIN_TOOL_CORNER_RADIUS: HIGH
+    MIN_WALL_THICKNESS: CRITICAL
+
+materials:
+    Default:
+        category: Default
+        is_active: true
+        rule_limits:
+            # Ours: aim for a Ø6 end mill, the common size for pockets; at least
+            # a Ø1 end mill, about the smallest a shop keeps for walls this deep.
+            # Set the limit to the radius of the smallest tool your shop will use.
+            MIN_TOOL_CORNER_RADIUS:
+                target: '3.0'
+                limit: '0.5'
+            # Hubs (Protolabs Network) CNC design guide: metals 0.8 mm
+            # recommended, 0.5 mm feasible.
+            MIN_WALL_THICKNESS:
+                target: '0.8'
+                limit: '0.5'
+
+    Aluminium 6061:
+        category: Aluminium
+        is_active: true
+        rule_limits:
+            MIN_TOOL_CORNER_RADIUS:
+                target: '3.0'
+                limit: '0.5'
+            MIN_WALL_THICKNESS:
+                target: '0.8'
+                limit: '0.5'
+
+    Brass:
+        category: Copper Alloy
+        is_active: true
+        rule_limits:
+            MIN_TOOL_CORNER_RADIUS:
+                target: '3.0'
+                limit: '0.5'
+            MIN_WALL_THICKNESS:
+                target: '0.8'
+                limit: '0.5'
+
+    Stainless Steel 304:
+        category: Steel
+        is_active: true
+        rule_limits:
+            # Ours: small end mills break in stainless steel; Ø2 is about the
+            # smallest worth planning on.
+            MIN_TOOL_CORNER_RADIUS:
+                target: '3.0'
+                limit: '1.0'
+            MIN_WALL_THICKNESS:
+                target: '0.8'
+                limit: '0.5'
+
+    POM (Acetal):
+        category: Engineering Thermoplastic
+        is_active: true
+        rule_limits:
+            MIN_TOOL_CORNER_RADIUS:
+                target: '3.0'
+                limit: '0.5'
+            # Hubs (Protolabs Network) CNC design guide: plastics 1.5 mm
+            # recommended, 1.0 mm feasible.
+            MIN_WALL_THICKNESS:
+                target: '1.5'
+                limit: '1.0'

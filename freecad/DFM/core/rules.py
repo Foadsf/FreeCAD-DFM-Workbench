@@ -492,6 +492,14 @@ class Rulebook(Enum):
         description="Length of the whole part compared with its width: long thin parts warp.",
         per_material=False,
     )
+    # -- Machining --
+    MIN_TOOL_CORNER_RADIUS = RuleType(
+        "Tool Corner Radius",
+        shape=RuleShape.TARGET_AND_LIMIT,
+        unit="mm",
+        comparison="min",
+        description="Radius of inside corners along the tool axis: an end mill leaves at least its own radius.",
+    )
 
     @property
     def id(self) -> str:
