@@ -24,7 +24,7 @@ PROCESSES = os.path.join(S.ROOT, "freecad", "DFM", "core", "processes")
 YAML = os.path.join(PROCESSES, "plastic_injection_molding.yaml")
 #: Every built-in process: each one's active rules must be fully wired.
 YAMLS = (YAML, *(os.path.join(PROCESSES, name) for name in (
-    "fdm_3d_printing.yaml", "resin_3d_printing.yaml", "powder_bed_fusion.yaml")))
+    "fdm_3d_printing.yaml", "resin_3d_printing.yaml", "powder_bed_fusion.yaml", "cnc_milling.yaml")))
 
 
 def diagrams():

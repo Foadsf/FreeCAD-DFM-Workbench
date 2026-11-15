@@ -53,6 +53,7 @@ _REQUIREMENT_LABELS = {
     ProcessRequirement.PULL_DIRECTION: "Pull direction",
     ProcessRequirement.SIDE_ACTIONS: "Side actions",
     ProcessRequirement.PRINT_ORIENTATION: "Print direction",
+    ProcessRequirement.TOOL_AXIS: "Tool axis",
     ProcessRequirement.NEUTRAL_PLANE: "Neutral plane",
     ProcessRequirement.NOMINAL_WALL_THICKNESS: "Nominal wall",
 }
@@ -172,6 +173,7 @@ class VectorRequirement(RequirementHandler):
     _COLORS = {
         ProcessRequirement.PULL_DIRECTION: PULL_DIRECTION_COLOR,
         ProcessRequirement.PRINT_ORIENTATION: (0.15, 0.45, 1.0),  # blue
+        ProcessRequirement.TOOL_AXIS: (0.1, 0.65, 0.3),  # green
         ProcessRequirement.SIDE_ACTIONS: (0.62, 0.32, 0.9),  # purple
     }
 
@@ -923,6 +925,7 @@ REQUIREMENT_HANDLER_TYPES: dict[ProcessRequirement, type[RequirementHandler]] = 
     ProcessRequirement.PULL_DIRECTION: VectorRequirement,
     ProcessRequirement.SIDE_ACTIONS: SideActionsRequirement,
     ProcessRequirement.PRINT_ORIENTATION: VectorRequirement,
+    ProcessRequirement.TOOL_AXIS: VectorRequirement,
     ProcessRequirement.NEUTRAL_PLANE: PlaneRequirement,
     # After the directions: what the part is, then the machine's values.
     ProcessRequirement.NOMINAL_WALL_THICKNESS: NominalWallRequirement,
@@ -1751,6 +1754,7 @@ def open_results(target_object, process, process_name: str, material_name: str,
     run_settings.pop(ProcessRequirement.PULL_DIRECTION.name, None)
     run_settings.pop(ProcessRequirement.SIDE_ACTIONS.name, None)
     run_settings.pop(ProcessRequirement.PRINT_ORIENTATION.name, None)
+    run_settings.pop(ProcessRequirement.TOOL_AXIS.name, None)
     run_settings.pop(ProcessRequirement.NEUTRAL_PLANE.name, None)
     run_settings.pop("prefs", None)
 
